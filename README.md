@@ -31,7 +31,7 @@
 
 Une réunion d'équipe est prévue à chaque fin d'échéance.
 
-| Echeance   |                                                                          Objectif                                                         |
+| Echéance   |                                                                          Objectif                                                         |
 | :---:      |:-------------------------------------------------------------------------------------------------------------------------------           |
 | 11/12      | Phase de documentation et de réflexion sur la façon d'implémenter la fonctionnalité. Décrire le choix d'implémentation retenu ci-dessous. |
 | 13/12      | Phase de développement de chaque fonctionnalité sur une branche distincte.                                                                |
