@@ -29,7 +29,7 @@
 
 ### Calendrier
 
-| Code Review n. | Date   |                                                                          Objectif                                                         |
+| Réunion n. | Date   |                                                                          Objectif                                                         |
 | :------------: | :---:  |:-------------------------------------------------------------------------------------------------------------------------------           |
 |       1        | 11/12   | Phase de documentation et de réflexion sur la façon d'implémenter la fonctionnalité. Décrire le choix d'implémentation retenu ci-dessous. |
 |       2        | 13/12   | Phase de développement de chaque fonctionnalité sur une branche distincte.                                                                |
