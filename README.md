@@ -40,7 +40,7 @@
 Ci-dessous sont explicitées les implémentations choisies pour chaque intervention évolutive sur l'application.
 
 ### Flux RSS
-Les cadriciels fournissent souvent des modules spécifiques pour la génération de flux RSS comme (sfeed)[https://symfony.com/legacy/doc/cookbook/1_1/fr/syndication] pour Symfony. Vu la simplicité du fonctionnement de cette application, nous avons décidé de ne pas avoir recours à l'un de ces modules mais de mettre en place nous-mêmes le flux RSS en suivant le protocole d'implémentation suivant :
+Les cadriciels fournissent souvent des modules spécifiques pour la génération de flux RSS comme [sfeed](https://symfony.com/legacy/doc/cookbook/1_1/fr/syndication) pour Symfony. Vu la simplicité du fonctionnement de cette application, nous avons décidé de ne pas avoir recours à l'un de ces modules mais de mettre en place nous-mêmes le flux RSS en suivant le protocole d'implémentation suivant :
 * Création une nouvelle route pour le flux RSS `/feed.xml`  qui servira le flux RSS.
 * Ajout une méthode DAO pour récupérer les 15 derniers liens dans `LinkDAO.php`
 * Création un nouveau contrôleur `RssFeedController.php` qui récupérer les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés.
