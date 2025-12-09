@@ -23,7 +23,7 @@
 
 ### Répartition du travail
 
-|  Flux RSS  | Page "Links"   |  Refonte UI       |
+|  Flux RSS  | Page Links   |  Refonte UI       |
 | :------:   | :------------:  | :------:          |
 | Filippos   |    Mathilde, Mathieu ?   |   Kamo, Mathieu ? |
 
