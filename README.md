@@ -23,10 +23,9 @@
 
 ### Répartition du travail
 
-|  Flux RSS  | Page "Links"   |  Refonte UI   |
-| :------:   | :------------:  | :------:      |
-| Filippos   |                 |               |
-|            |                 |               |
+|  Flux RSS  | Page "Links"   |  Refonte UI       |
+| :------:   | :------------:  | :------:          |
+| Filippos   |    Mathilde ?   |   Kamo, Mathieu ? |
 
 ### Calendrier
 
