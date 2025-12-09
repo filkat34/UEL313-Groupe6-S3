@@ -11,7 +11,7 @@
 
 ## Objectifs
 
-- [x] Assure la maintenance corrective et évolutive d'une application existante
+- [x] Assurer la maintenance corrective et évolutive d'une application existante
 - [x] Savoir utiliser le client git et la plateforme Github en vue de collaborer au sein d'une équipe de développement.
 
 ## Mise en place de l'environnement de développement
