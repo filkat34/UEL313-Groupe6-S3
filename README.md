@@ -33,7 +33,7 @@
 | :------------: | :---:  |:-------------------------------------------------------------------------------------------------------------------------------           |
 |       1        | 11/12   | Phase de documentation et de réflexion sur la façon d'implémenter la fonctionnalité. Décrire le choix d'implémentation retenu ci-dessous. |
 |       2        | 13/12   | Phase de développement de chaque fonctionnalité sur une branche distincte.                                                                |
-|       3        | 13/12   | Relecture des branches, fusion et tests manuels fonctionnels.                                                                             |
+|       3        | 14/12   | Relecture des branches, fusion et tests manuels fonctionnels.                                                                             |
 
 ## Phase de documentation et de réflexion
 
