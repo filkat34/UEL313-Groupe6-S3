@@ -98,15 +98,54 @@ class LinkDAO extends DAO
         }
         return $_links;
     }
-    // Fonction publique de compte des lignes liste : renvoi un entier
+    // FONCTION PUBLIQUE COMPTE DES LIGNES : renvoi un entier
     public function countAll(): int
     {
-        // Stockage requête SQL dans variable $sql, qui compte toutes les lignes de la table link (nom c comme count)
-        $sql = "SELECT COUNT(*) AS c FROM link";
-        // Exécution requête (récupération objet de connexion) et stockage résultat dans variable $row en mode tableau associatif avec clé => valeur
-        $row = $this->getDb()->fetchColumn($sql);
-        // Retour de la valeur (entier) de la clé c (count) ou 0 si pas définie, fetchColumn car version DBAL 2.12
-        return (int) ($row['c'] ?? 0);
+        // Stockage requête SQL dans variable $sql, qui compte toutes les lignes de la table de liens (nom c comme count)
+        $sql = "SELECT COUNT(*) AS c FROM tl_liens";
+        // Renvoi de la valeur convetie en entier du count, après récupération de la connecion à la BDD, exécution requête via fetchColumn car version DBAL 2.12 (1ère colonne 1ère ligne)
+        return (int) $this->getDb()->fetchColumn($sql);
+    }
+
+    // FONCTION PUBLIQUE PAGNIGATION, avec n° de page (entier) et une limite de 15 links/page : renvoi tableau de link
+    public function findByPage(int $page, int $limit = 15): array
+    {
+        // N° de page sera au moins égal à 1
+        $page = max(1, $page);
+        // Limite de links/page sera au moins égale à 1
+        $limit = max(1, $limit);
+        // Calcul du décalage (offset) en fonction de la page et de la limite, soit combien d'éléments je saute avant de débuter comptage et récupérer résultats
+        $offset = ($page - 1) * $limit;
+
+        // Requête SQL pour récupération des colonnes de la table tl_liens, triées par ID décroissant, avec limite de 15 résultats et l'offset pour pagination
+        $sql = "SELECT * FROM tl_liens
+                ORDER BY lien_id DESC
+                LIMIT :limit OFFSET :offset";
+
+        // Préparation requête (pour concaténer)
+        $stmt = $this->getDb()->prepare($sql);
+        // Liaison paramètre limit et valeur de la variable $limit (entier, forcé PDO)
+        $stmt->bindValue('limit', $limit, \PDO::PARAM_INT);
+        // Idem pour paramètre offset
+        $stmt->bindValue('offset', $offset, \PDO::PARAM_INT);
+        // Exécution requête
+        $stmt->execute();
+
+        // Pas fetchColumn sinon renvoi qu'une ligne, donc fetchAll pour récupérer toutes les lignes de liens
+        $rows = $stmt->fetchAll();
+
+        // Mapping = Transofmation des lignes SQL rows en objets link avec méthode buildDomainObject()
+        // Tableau vide pour stockage liens
+        $links = [];
+        // Pour chaque ligne renvoyée par la BDD
+        foreach ($rows as $row) {
+            // Récupération ID du lien de la colonne lien_id avec variable $linkId
+            $linkId = $row['lien_id'];
+            // Ligne devient un objet link avec buildDomainObject puis stockage dans tableau $links avec une clé $linkId
+            $links[$linkId] = $this->buildDomainObject($row);
+        }
+        // Renvoi tableau de lien $links
+        return $links;
     }
 
     /**
