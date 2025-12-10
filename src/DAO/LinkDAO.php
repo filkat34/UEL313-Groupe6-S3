@@ -16,11 +16,13 @@ class LinkDAO extends DAO
      */
     private $tagDAO;
 
-    public function setUserDAO($userDAO) {
+    public function setUserDAO($userDAO)
+    {
         $this->userDAO = $userDAO;
     }
 
-    public function setTagDAO($tagDAO) {
+    public function setTagDAO($tagDAO)
+    {
         $this->tagDAO = $tagDAO;
     }
 
@@ -29,7 +31,8 @@ class LinkDAO extends DAO
      *
      * @return array A list of all links.
      */
-    public function findAll() {
+    public function findAll()
+    {
         $sql = "
             SELECT * 
             FROM tl_liens 
@@ -53,7 +56,8 @@ class LinkDAO extends DAO
      *
      * @return \Watson\Domain\Link|throws an exception if no matching link is found.
      */
-    public function find($id) {
+    public function find($id)
+    {
         $sql = "
             SELECT * 
             FROM tl_liens 
@@ -61,9 +65,9 @@ class LinkDAO extends DAO
         ";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
 
-        if ($row){
+        if ($row) {
             return $this->buildDomainObject($row);
-        }else{
+        } else {
             throw new \Exception("No link matching id " . $id);
         }
     }
@@ -75,7 +79,8 @@ class LinkDAO extends DAO
      *
      * @return A list of all links.
      */
-    public function findAllByTag($id) {
+    public function findAllByTag($id)
+    {
         $sql = "
             SELECT tl_liens.*
             FROM tl_liens
@@ -93,13 +98,24 @@ class LinkDAO extends DAO
         }
         return $_links;
     }
+    // Fonction publique de compte des lignes liste : renvoi un entier
+    public function countAll(): int
+    {
+        // Stockage requête SQL dans variable $sql, qui compte toutes les lignes de la table link (nom c comme count)
+        $sql = "SELECT COUNT(*) AS c FROM link";
+        // Exécution requête (récupération objet de connexion) et stockage résultat dans variable $row en mode tableau associatif avec clé => valeur
+        $row = $this->getDb()->fetchColumn($sql);
+        // Retour de la valeur (entier) de la clé c (count) ou 0 si pas définie, fetchColumn car version DBAL 2.12
+        return (int) ($row['c'] ?? 0);
+    }
 
     /**
      * Saves a link into the database.
      *
      * @param \Watson\Domain\Link $link The link to save
      */
-    public function save(Link $link) {
+    public function save(Link $link)
+    {
         $linkData = array(
             'lien_titre' => $link->getTitle(),
             'lien_url'   => $link->getUrl(),
@@ -125,7 +141,8 @@ class LinkDAO extends DAO
      *
      * @param integer $id The link id.
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         // Delete the link
         $this->getDb()->delete('tl_liens', array('lien_id' => $id));
     }
@@ -136,7 +153,8 @@ class LinkDAO extends DAO
      * @param array $row The DB row containing Link data.
      * @return array $_tag With Objects of \Watson\Domain\Link
      */
-    protected function buildDomainObject($row) {
+    protected function buildDomainObject($row)
+    {
         $link = new Link();
         $link->setId($row['lien_id']);
         $link->setTitle($row['lien_titre']);
@@ -162,7 +180,8 @@ class LinkDAO extends DAO
      *
      * @param integer $userId The id of the user
      */
-    public function deleteAllByUser($userId) {
+    public function deleteAllByUser($userId)
+    {
         $this->getDb()->delete('tl_liens', array('user_id' => $userId));
     }
 }
