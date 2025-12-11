@@ -84,6 +84,10 @@ Pour tester, le bon fonctionnement du flux RSS, nous avons d'abord consulté le 
 
 ![feedXML](docs/fluxRSSXML.png)
 
-Ensuite nous avons installé l'extention _Feeder_ sur le navigateur _Chrome_ et nous nous sommes rendus sur la même URL. Les 15 derniers liens ajoutés y apparaissaient correctement. Nous avons ajouté ensuite un nouveau lien "test" dans l'application Watson pour vérifier si l'affichage était bien dynamique : une notification concernant la publication de ce nouveau lien est correctement apparue.
+Ensuite nous avons installé l'extention _Feeder_ sur le navigateur _Chrome_ et nous nous sommes rendus sur la même URL. Les 15 derniers liens ajoutés y apparaissaient correctement sur l'interface de l'application.
+
+![feedXML](docs/feederfullscreenwithoutnotif.png)
+
+Nous avons ajouté ensuite un nouveau lien "test" dans l'application Watson pour vérifier si l'affichage était bien dynamique : une notification concernant la publication de ce nouveau lien est correctement apparue.
 
 ![feeder](docs/feederfullscreen.png)
