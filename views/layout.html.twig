@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,17 +28,17 @@
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
+                                <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
                                 </ul>
                             </li>
                         {% else %}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b></a>
+                                <span class="glyphicon glyphicon-user"></span> Déconnecté <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('login') }}">Log in</a></li>
+                                    <li><a href="{{ path('login') }}">Connexion</a></li>
                                 </ul>
                             </li>
                         {% endif %}
@@ -48,7 +48,7 @@
         </nav>
         <div id="content">{% block content %}{% endblock %}</div>
         <footer class="footer">
-            Watson - Made with love by CvTIC and his students | <a href="/feed" target="_blank">FluxRSS</a>
+            Watson - Réalisé avec amour par le Groupe 6 | <a href="/feed" target="_blank">FluxRSS</a>
         </footer>
     </div>
     

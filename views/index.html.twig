@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block content %}
 	<div class="row">
@@ -8,8 +8,8 @@
 			<div class="col-md-4">
 			    <h2><a class="linkTitle" href="{{ path('link', { 'id': link.id }) }}">{{ link.title }}</a></h2>
 			    <p>{{ link.desc }}</p>
-			    <a href="{{ link.url }}" title="" target="_blank">Open ></a>
-			    <em>(by {{ link.user.username }})</em>
+			    <a href="{{ link.url }}" title="" target="_blank">Ouvrir ></a>
+			    <em>(par {{ link.user.username }})</em>
 
 			    {% for tag in link.tags %}
 			    	<a href="{{ path('tag', { 'id': tag.id }) }}" title="Filtrer">

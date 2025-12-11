@@ -6,8 +6,8 @@
 <p>
     <h2>{{ link.title }}</h2>
     <p>{{ link.desc }}</p>
-    <a href="{{ link.url }}" title="" target="_blank">Open ></a>
-    <em>(by {{ link.user.username }})</em>
+    <a href="{{ link.url }}" title="" target="_blank">Ouvrir ></a>
+    <em>(par {{ link.user.username }})</em>
 
     {% for tag in link.tags %}
     	<a href="{{ path('tag', { 'id': tag.id }) }}" title="Filtrer">

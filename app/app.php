@@ -73,13 +73,13 @@ $app['dao.link'] = $app->share(function ($app) {
 $app->error(function (\Exception $e, $code) use ($app) {
     switch ($code) {
         case 403:
-            $message = 'Access denied.';
+            $message = 'Accès refusé.';
             break;
         case 404:
-            $message = 'The requested resource could not be found.';
+            $message = 'La ressource demandée est introuvable.';
             break;
         default:
-            $message = "Something went wrong.";
+            $message = "Une erreur s'est produite.";
     }
     return $app['twig']->render('error.html.twig', array('message' => $message));
 });
