@@ -48,6 +48,12 @@ Les cadriciels fournissent souvent des modules spécifiques pour la génération
 * Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés.
 
 ### Page de liens
+Pour la pagination du back-office, on a choisit une approche côté serveur (PHP/SQL) plutôt qu’en JavaScript avec architecture MVC (DAO pour les données, contrôleur pour la logique métier, vue pour le rendu HTML avec Twig).
+Objectif : Limiter la quantité de données chargées (éviter le chargement de toute la table tl_liens) et respecter la contrainte de 15 liens/page directement au niveau de la BDD.
+* Côté DAO (LinkDAO) : Ajout de la méthode countAll() pour renvoyer le nombre total de liens présents + Ajout de la méthode findByPage() qui calcule un offset (décalage) selon le numéro de page, exécute une requête avec tri descendant et qui transforme les lignes SQL en objets via la méthode qui existe déjà buildDomainObject().
+* Côté contrôleur (AdminController::indexAction) : Ajout de l’objet Request pour pouvoir lire le paramètre ?page= dans l’URL + Récupération du numéro de page + Appel de countAll() pour compter le nombre total de liens et donc du nombre total de pages + Vérification que page demandée ne dépasse pas la dernière page (sinon on donne la dernière page) + Remplacement de findAll() par findByPage($page, $limit) pour récupérer que les 15 liens de la page courante + Passage à la view Twig des variables links, page et totalPages.
+* Côté vue (admin.html.twig) : Réutilisation du tableau pour afficher les liens avec ajout de la class pagination de Bootstrap pour afficher proprement les liens vers les pages 1 jusqu'à la dernière, pour indiquer la page courante comme active, pour désactiver les boutons "précédent" et "suivant" si on est sur la page 1 ou la dernière page et pour génèrer les URLs avec pour rester cohérent avec route /admin.
+
 ### Refonte UI
 
 ## Phase de développement
