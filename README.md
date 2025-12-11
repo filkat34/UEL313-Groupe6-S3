@@ -78,7 +78,7 @@ Pour la page de liens, nous avons ajouté un système de pagination dans l’esp
 ![pagination_1](docs/pagination_1.png)
 ![pagination_1](docs/pagination_2.png)
 
-### FluxRSS
+### Flux RSS
 
 Pour tester, le bon fonctionnement du flux RSS, nous avons d'abord consulté le fichier _xml_ disponible sur `/feed`.
 
