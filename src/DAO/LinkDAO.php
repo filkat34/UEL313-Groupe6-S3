@@ -16,11 +16,13 @@ class LinkDAO extends DAO
      */
     private $tagDAO;
 
-    public function setUserDAO($userDAO) {
+    public function setUserDAO($userDAO)
+    {
         $this->userDAO = $userDAO;
     }
 
-    public function setTagDAO($tagDAO) {
+    public function setTagDAO($tagDAO)
+    {
         $this->tagDAO = $tagDAO;
     }
 
@@ -29,7 +31,8 @@ class LinkDAO extends DAO
      *
      * @return array A list of all links.
      */
-    public function findAll() {
+    public function findAll()
+    {
         $sql = "
             SELECT * 
             FROM tl_liens 
@@ -53,7 +56,8 @@ class LinkDAO extends DAO
      *
      * @return \Watson\Domain\Link|throws an exception if no matching link is found.
      */
-    public function find($id) {
+    public function find($id)
+    {
         $sql = "
             SELECT * 
             FROM tl_liens 
@@ -61,9 +65,9 @@ class LinkDAO extends DAO
         ";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
 
-        if ($row){
+        if ($row) {
             return $this->buildDomainObject($row);
-        }else{
+        } else {
             throw new \Exception("No link matching id " . $id);
         }
     }
@@ -75,7 +79,8 @@ class LinkDAO extends DAO
      *
      * @return A list of all links.
      */
-    public function findAllByTag($id) {
+    public function findAllByTag($id)
+    {
         $sql = "
             SELECT tl_liens.*
             FROM tl_liens
@@ -93,13 +98,63 @@ class LinkDAO extends DAO
         }
         return $_links;
     }
+    // FONCTION PUBLIQUE COMPTE DES LIGNES : renvoi un entier
+    public function countAll(): int
+    {
+        // Stockage requête SQL dans variable $sql, qui compte toutes les lignes de la table de liens (nom c comme count)
+        $sql = "SELECT COUNT(*) AS c FROM tl_liens";
+        // Renvoi de la valeur convetie en entier du count, après récupération de la connecion à la BDD, exécution requête via fetchColumn car version DBAL 2.12 (1ère colonne 1ère ligne)
+        return (int) $this->getDb()->fetchColumn($sql);
+    }
+
+    // FONCTION PUBLIQUE PAGNIGATION, avec n° de page (entier) et une limite de 15 links/page : renvoi tableau de link
+    public function findByPage(int $page, int $limit = 15): array
+    {
+        // N° de page sera au moins égal à 1
+        $page = max(1, $page);
+        // Limite de links/page sera au moins égale à 1
+        $limit = max(1, $limit);
+        // Calcul du décalage (offset) en fonction de la page et de la limite, soit combien d'éléments je saute avant de débuter comptage et récupérer résultats
+        $offset = ($page - 1) * $limit;
+
+        // Requête SQL pour récupération des colonnes de la table tl_liens, triées par ID décroissant, avec limite de 15 résultats et l'offset pour pagination
+        $sql = "SELECT * FROM tl_liens
+                ORDER BY lien_id DESC
+                LIMIT :limit OFFSET :offset";
+
+        // Préparation requête (pour concaténer)
+        $stmt = $this->getDb()->prepare($sql);
+        // Liaison paramètre limit et valeur de la variable $limit (entier, forcé PDO)
+        $stmt->bindValue('limit', $limit, \PDO::PARAM_INT);
+        // Idem pour paramètre offset
+        $stmt->bindValue('offset', $offset, \PDO::PARAM_INT);
+        // Exécution requête
+        $stmt->execute();
+
+        // Pas fetchColumn sinon renvoi qu'une ligne, donc fetchAll pour récupérer toutes les lignes de liens
+        $rows = $stmt->fetchAll();
+
+        // Mapping = Transofmation des lignes SQL rows en objets link avec méthode buildDomainObject()
+        // Tableau vide pour stockage liens
+        $links = [];
+        // Pour chaque ligne renvoyée par la BDD
+        foreach ($rows as $row) {
+            // Récupération ID du lien de la colonne lien_id avec variable $linkId
+            $linkId = $row['lien_id'];
+            // Ligne devient un objet link avec buildDomainObject puis stockage dans tableau $links avec une clé $linkId
+            $links[$linkId] = $this->buildDomainObject($row);
+        }
+        // Renvoi tableau de lien $links
+        return $links;
+    }
 
     /**
      * Saves a link into the database.
      *
      * @param \Watson\Domain\Link $link The link to save
      */
-    public function save(Link $link) {
+    public function save(Link $link)
+    {
         $linkData = array(
             'lien_titre' => $link->getTitle(),
             'lien_url'   => $link->getUrl(),
@@ -125,7 +180,8 @@ class LinkDAO extends DAO
      *
      * @param integer $id The link id.
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         // Delete the link
         $this->getDb()->delete('tl_liens', array('lien_id' => $id));
     }
@@ -136,7 +192,8 @@ class LinkDAO extends DAO
      * @param array $row The DB row containing Link data.
      * @return array $_tag With Objects of \Watson\Domain\Link
      */
-    protected function buildDomainObject($row) {
+    protected function buildDomainObject($row)
+    {
         $link = new Link();
         $link->setId($row['lien_id']);
         $link->setTitle($row['lien_titre']);
@@ -162,7 +219,8 @@ class LinkDAO extends DAO
      *
      * @param integer $userId The id of the user
      */
-    public function deleteAllByUser($userId) {
+    public function deleteAllByUser($userId)
+    {
         $this->getDb()->delete('tl_liens', array('user_id' => $userId));
     }
 }
