@@ -49,6 +49,8 @@ Les cadriciels fournissent souvent des modules spécifiques pour la génération
 - Ajout d'une méthode DAO pour récupérer les 15 derniers liens dans `LinkDAO.php`
 - Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés.
 
+Idéalement, il aurait fallu également modifier la table des données de l'applications pour ajouter une ligne _cratedat_ car, en l'état actuel, les derniers liens sont récupérés en fonction de leur clé primaire qui est automatiqument incrémentée à chaque ajout de lien dans la base.
+
 ### Page de liens
 
 Pour la pagination du back-office, on a choisit une approche côté serveur (PHP/SQL) plutôt qu’en JavaScript avec architecture MVC (DAO pour les données, contrôleur pour la logique métier, vue pour le rendu HTML avec Twig).
