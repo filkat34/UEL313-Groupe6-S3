@@ -66,3 +66,6 @@ Plusieurs issues ont été identifiées en fonction des fonctionnalités à impl
 3. Une fois son travail fini, il fait une demande de tirage et dans la description, ne pas oublier de lier la demande à une issue en mettant "Fixes #[numéro de l'issue concernée]" (par exemple : "Fixes #11"). Github se chargera de fermer l'issue en question une fois la fusion de la demande faite.
 
 ## Tests manuels fonctionnels
+Pour la page de liens, nous avons ajouté un système de pagination dans l’espace d’administration, limitant l’affichage à 15 liens par page. Cela permet de fluidifier la navigation et d’éviter l’affichage d’une liste trop longue.
+![pagination_1](docs/pagination_1.png)
+![pagination_1](docs/pagination_2.png)
