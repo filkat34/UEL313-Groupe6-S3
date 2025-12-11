@@ -25,7 +25,7 @@
 
 |  Flux RSS  | Page Links   |  Refonte UI       |
 | :------:   | :------------:  | :------:          |
-| Filippos   |    Mathilde, Mathieu ?   |   Kamo, Mathieu ? |
+| Filippos   |    Mathilde & Mathieu   |   Kamo & Mathieu |
 
 ### Calendrier
 
