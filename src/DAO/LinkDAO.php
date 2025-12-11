@@ -50,6 +50,25 @@ class LinkDAO extends DAO
     }
 
     /**
+     * Retourne les 15 derniers liens ajoutés
+     * Utilisé par le flux RSS
+     * @param int $limit Nombre de liens à retourner
+     * @return array Liste des liens
+     */
+    public function getLastLinks($limit = 15)
+    {
+        $sql = "SELECT * FROM tl_liens ORDER BY lien_id DESC LIMIT " . (int)$limit;
+        $result = $this->getDb()->fetchAll($sql);
+
+        $links = array();
+        foreach ($result as $row) {
+            $linkId = $row['lien_id'];
+            $links[$linkId] = $this->buildDomainObject($row);
+        }
+        return $links;
+    }
+
+    /**
      * Returns a link matching the supplied id.
      *
      * @param integer $id The link id.
