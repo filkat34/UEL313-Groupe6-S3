@@ -16,9 +16,9 @@ class RssFeedController
             // Générer le xml du flux RSS
             $rss = '<?xml version="1.0" encoding="UTF-8"?>';
             $rss .= '<rss version="2.0"><channel>';
-            $rss .= '<title>Derniers liens ajoutés</title>';
-            $rss .= '<link>' . $app['request_stack']->getCurrentRequest()->getSchemeAndHttpHost() . '</link>';
-            $rss .= '<description>Les 15 derniers liens ajoutés</description>';
+            $rss .= '<title>Watson web app</title>';
+            $rss .= '<link>' . $app['request_stack']->getCurrentRequest()->getSchemeAndHttpHost() . '</link>'; // Lien vers la page d'accueil
+            $rss .= '<description>Derniers liens ajoutés</description>';
 
             foreach ($links as $link) {
                 $rss .= '<item>';
@@ -30,7 +30,7 @@ class RssFeedController
 
             $rss .= '</channel></rss>';
 
-            // Retourner le flux RSS avec l'en-tête correct
+            // Retourner le flux RSS
             return new Response($rss, 200, ['Content-Type' => 'text/xml']);
         } catch (\Exception $e) {
             return new Response('DAO ERROR: ' . $e->getMessage(), 500);
