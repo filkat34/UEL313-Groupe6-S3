@@ -3,20 +3,47 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-	<div class="row">
-		{% for link in links %}
-			<div class="col-md-4">
-			    <h2><a class="linkTitle" href="{{ path('link', { 'id': link.id }) }}">{{ link.title }}</a></h2>
-			    <p>{{ link.desc }}</p>
-			    <a href="{{ link.url }}" title="" target="_blank">Ouvrir ></a>
-			    <em>(par {{ link.user.username }})</em>
+    <div class="page-header">
+        <h1>Bienvenue sur Watson</h1>
+        <p class="lead">Découvrez notre sélection de liens</p>
+    </div>
 
-			    {% for tag in link.tags %}
-			    	<a href="{{ path('tag', { 'id': tag.id }) }}" title="Filtrer">
-			    		{{ tag.title }}
-			    	</a>
-			    {% endfor %}
-			</div>
-		{% endfor %}
-	</div>
+    <div class="row row-eq-height">
+        {% for link in links %}
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('link', { 'id': link.id }) }}">{{ link.title }}</a>
+                        </h5>
+                        <p class="text-muted">
+                            <small>
+                                <span class="glyphicon glyphicon-user"></span>
+                                Partagé par {{ link.user.username }}
+                            </small>
+                        </p>
+                        <p class="card-text">{{ link.desc }}</p>
+                        {% if link.tags|length > 0 %}
+                            <div class="link-tags">
+                                {% for tag in link.tags %}
+                                    <a href="{{ path('tag', { 'id': tag.id }) }}" class="label label-info tag-badge">
+                                        <span class="glyphicon glyphicon-tag"></span> {{ tag.title }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <a href="{{ link.url }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <span class="glyphicon glyphicon-new-window"></span> Ouvrir le lien
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-xs-12">
+                <div class="alert alert-info text-center">
+                    <p><strong>Aucun lien disponible pour le moment.</strong></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

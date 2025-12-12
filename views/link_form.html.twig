@@ -4,70 +4,83 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
-{% for flashMessage in app.session.flashbag.get('success') %}
-<div class="alert alert-success">
-    {{ flashMessage }}
-</div>
-{% endfor %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <span class="glyphicon glyphicon-link"></span>
+                    </div>
+                    <h2>{{ title }}</h2>
+                    <p class="text-muted">Gestion des liens partagés</p>
+                </div>
 
-<div class="well">
-{{ form_start(linkForm, { 'attr': {'class': 'form-horizontal'} }) }}
-    <div class="form-group">
-        {{ form_label(linkForm.url, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(linkForm.url) }}
-            {{ form_widget(linkForm.url, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span class="glyphicon glyphicon-ok"></span> {{ flashMessage }}
+                    </div>
+                {% endfor %}
+
+                <div class="login-form-wrapper">
+                    {{ form_start(linkForm, { 'attr': {'class': 'login-form'} }) }}
+                    <div class="form-group">
+                        <label for="{{ linkForm.url.vars.id }}">
+                            <span class="glyphicon glyphicon-globe"></span> URL
+                        </label>
+                        {{ form_errors(linkForm.url) }}
+                        {{ form_widget(linkForm.url, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'placeholder': 'https://exemple.com'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ linkForm.title.vars.id }}">
+                            <span class="glyphicon glyphicon-text-width"></span> Titre
+                        </label>
+                        {{ form_errors(linkForm.title) }}
+                        {{ form_widget(linkForm.title, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'placeholder': 'Titre du lien'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ linkForm.desc.vars.id }}">
+                            <span class="glyphicon glyphicon-align-left"></span> Description
+                        </label>
+                        {{ form_errors(linkForm.desc) }}
+                        {{ form_widget(linkForm.desc, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'rows': '5',
+                            'placeholder': 'Description du lien'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ linkForm.tags.vars.id }}">
+                            <span class="glyphicon glyphicon-tags"></span> Tags
+                        </label>
+                        {{ form_errors(linkForm.tags) }}
+                        {{ form_widget(linkForm.tags, { 'attr': {
+                            'class': 'form-control input-lg'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block">
+                            <span class="glyphicon glyphicon-save"></span> Enregistrer
+                        </button>
+                        <a href="{{ path('admin') }}" class="btn btn-default btn-lg btn-block" style="margin-top: 10px;">
+                            <span class="glyphicon glyphicon-remove"></span> Annuler
+                        </a>
+                    </div>
+                    {{ form_end(linkForm) }}
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        {{ form_label(linkForm.title, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(linkForm.title) }}
-            {{ form_widget(linkForm.title, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-    
-    <div class="form-group">
-        {{ form_label(linkForm.desc, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(linkForm.desc) }}
-            {{ form_widget(linkForm.desc, { 'attr':  {
-                'class': 'form-control',
-                'rows': '8'
-            }}) }}
-        </div>
-    </div>
-
-    <div class="form-group">
-        {{ form_label(linkForm.tags, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(linkForm.tags) }}
-            {{ form_widget(linkForm.tags, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-3">
-            <input type="submit" class="btn btn-primary" value="Enregistrer" />
-        </div>
-    </div>
-{{ form_end(linkForm) }}
-</div>
 {% endblock %}
