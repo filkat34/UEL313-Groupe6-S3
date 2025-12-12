@@ -84,6 +84,20 @@ h1 {
     margin: 0;
 }
 
+.footer .rss-link {
+    color: #888;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.footer .rss-link:hover {
+    color: oklch(75.1% 0.1814 22.37);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
 /* ========================================
    3. COMPOSANTS - BOUTONS
    ======================================== */
@@ -105,14 +119,14 @@ h1 {
 
 .btn-primary {
     background-color: oklch(95% 0.0081 61.42);
-    color: black;
+    color: oklch(23.27% 0.0249 284.3);
     border-color: oklch(90% 0.0081 61.42);
 }
 
 .btn-primary:hover {
     background-color: oklch(90% 0.0081 61.42);
     border-color: oklch(90% 0.0081 61.42);
-    color: black;
+    color: oklch(23.27% 0.0249 284.3);
 }
 
 .btn-danger {
@@ -149,6 +163,12 @@ h1 {
     background: oklch(83.92% 0.0901 136.87);
     color: oklch(23.27% 0.0249 284.3);
     border-color: oklch(83.92% 0.0901 136.87);
+}
+
+.btn-success:hover {
+    background: oklch(0.82 0.167 137.715);
+    color: oklch(23.27% 0.0249 284.3);
+    border-color: oklch(0.82 0.167 137.715);
 }
 
 .btn-login {
