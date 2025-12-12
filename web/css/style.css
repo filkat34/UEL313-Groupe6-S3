@@ -66,6 +66,28 @@ h1 {
     color: oklch(23.27% 0.0249 284.3);
 }
 
+.custom-navbar .navbar-toggle {
+    border: 2px solid oklch(23.27% 0.0249 284.3);
+    background-color: oklch(97% 0.0035 67.78);
+    margin-top: 23px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.custom-navbar .navbar-toggle:hover,
+.custom-navbar .navbar-toggle:focus {
+    background-color: oklch(75.1% 0.1814 22.37);
+    border-color: oklch(75.1% 0.1814 22.37);
+}
+
+.custom-navbar .navbar-toggle .icon-bar {
+    background-color: oklch(23.27% 0.0249 284.3);
+    height: 3px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
 /* Footer */
 .footer {
     position: absolute;
