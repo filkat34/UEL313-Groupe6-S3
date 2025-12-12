@@ -9,6 +9,10 @@
 | Mathieu L.  |  mathleys  |
 | Filippos K. |  filkat34  |
 
+## Dépôt public
+
+Le projet est hébergé sur Github : [https://github.com/filkat34/UEL313-Groupe6-S3](https://github.com/filkat34/UEL313-Groupe6-S3)
+
 ## Objectifs
 
 - [x] Assurer la maintenance corrective et évolutive d'une application existante
