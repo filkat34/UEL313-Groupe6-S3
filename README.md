@@ -51,9 +51,9 @@ Les cadriciels fournissent souvent des modules spécifiques pour la génération
 
 - Création d'une nouvelle route pour le flux RSS `/feed` qui servira le flux RSS.
 - Ajout d'une méthode DAO pour récupérer les 15 derniers liens dans `LinkDAO.php`
-- Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés. Dans le _content-type_ de la réponse du contrôleur, nous avons choisi de mettre _application/rss+xml_ plutôt que _'text/xml_ qui est plus universel car le premier a une meilleur compatibilité avec les agrégateurs de flux rss.
+- Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés. Dans le _content-type_ de la réponse du contrôleur, nous avons choisi de mettre _application/rss+xml_ plutôt que _text/xml_ qui est plus universel car le premier a une meilleure compatibilité avec les agrégateurs de flux rss.
 
-Idéalement, il aurait fallu également modifier la table des données de l'applications pour ajouter un champ _createdat_ car, en l'état actuel, les derniers liens sont récupérés en fonction de leur clé primaire qui est automatiqument incrémentée à chaque ajout de lien dans la base.
+Idéalement, il aurait fallu également modifier la table des données de l'application pour ajouter un champ _createdat_ car, en l'état actuel, les derniers liens sont récupérés en fonction de leur clé primaire qui est automatiqument incrémentée à chaque ajout de lien dans la base.
 
 ### Page de liens
 
