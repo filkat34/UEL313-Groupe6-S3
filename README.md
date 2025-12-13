@@ -51,9 +51,9 @@ Les cadriciels fournissent souvent des modules spécifiques pour la génération
 
 - Création d'une nouvelle route pour le flux RSS `/feed` qui servira le flux RSS.
 - Ajout d'une méthode DAO pour récupérer les 15 derniers liens dans `LinkDAO.php`
-- Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés.
+- Création d'un nouveau contrôleur `RssFeedController.php` qui récupère les 15 derniers liens grâce à la méthode DAO précédemment implémentée et qui génère le fichier xml du flux à partir des liens récupérés. Dans le _content-type_ de la réponse du contrôleur, nous avons choisi de mettre _application/rss+xml_ plutôt que _'text/xml_ qui est plus universel car le premier a une meilleur compatibilité avec les agrégateurs de flux rss.
 
-Idéalement, il aurait fallu également modifier la table des données de l'applications pour ajouter un champ _cratedat_ car, en l'état actuel, les derniers liens sont récupérés en fonction de leur clé primaire qui est automatiqument incrémentée à chaque ajout de lien dans la base.
+Idéalement, il aurait fallu également modifier la table des données de l'applications pour ajouter un champ _createdat_ car, en l'état actuel, les derniers liens sont récupérés en fonction de leur clé primaire qui est automatiqument incrémentée à chaque ajout de lien dans la base.
 
 ### Page de liens
 
@@ -67,7 +67,7 @@ Pour la pagination du back-office, on a choisit une approche côté serveur (PHP
 
 ### Refonte UI
 
-![watson](docs/watson.png) 
+![watson](docs/watson.png)
 
 Pour la refonte de l'interface de Watson, il a été choisi de conserver Bootstrap dans sa version 3.3 tout en modernisant l'apparence générale de l'application.
 
@@ -80,19 +80,19 @@ Pour la refonte de l'interface de Watson, il a été choisi de conserver Bootstr
 - **Cartes de liens** : Transformation des liens en cartes modernes avec ombres portées, coins arrondis (20px) et animations au survol (translation verticale + changement d'ombre)
 - **Formulaires** : Création d'un style unifié pour les pages de connexion et d'éditions
 - **Espace administration** :
-    - Onglets modernisés avec fond blanc, radius cohérent et transition fluide entre les onglets
-    - Tableaux épurés avec lignes au survol et boutons d'action colorés
-    - Modales de confirmation centrées avec icône d'avertissement et design aligné sur les formulaires
+  - Onglets modernisés avec fond blanc, radius cohérent et transition fluide entre les onglets
+  - Tableaux épurés avec lignes au survol et boutons d'action colorés
+  - Modales de confirmation centrées avec icône d'avertissement et design aligné sur les formulaires
 - **Footer** : Simplification avec icône RSS en plus du texte "Flux RSS" et effet au survol
 - **Pagination** : Style moderne avec coins arrondis, couleurs cohérentes et états désactivés visuellement distincts
 
 **Principes de design appliqués :**
+
 - Utilisation intensive de `border-radius` pour adoucir l'interface
 - Ombres portées (`box-shadow`) pour créer de la profondeur
 - Transitions CSS pour des interactions fluides
 - Espacement généreux pour améliorer la lisibilité
 - Couleurs cohérentes avec la charte graphique
-
 
 ## Phase de développement
 

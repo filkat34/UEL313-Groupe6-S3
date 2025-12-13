@@ -31,7 +31,7 @@ class RssFeedController
             $rss .= '</channel></rss>';
 
             // Retourner le flux RSS
-            return new Response($rss, 200, ['Content-Type' => 'text/xml']);
+            return new Response($rss, 200, ['Content-Type' => 'application/rss+xml']);
         } catch (\Exception $e) {
             return new Response('DAO ERROR: ' . $e->getMessage(), 500);
         }
