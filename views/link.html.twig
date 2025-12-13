@@ -3,16 +3,44 @@
 {% block title %}{{ link.title }}{% endblock %}
 
 {% block content %}
-<p>
-    <h2>{{ link.title }}</h2>
-    <p>{{ link.desc }}</p>
-    <a href="{{ link.url }}" title="" target="_blank">Open ></a>
-    <em>(by {{ link.user.username }})</em>
+    <div class="page-header">
+        <h1>{{ link.title }}</h1>
+        <p class="text-muted">
+            <small>
+                <span class="glyphicon glyphicon-user"></span>
+                Partagé par {{ link.user.username }}
+            </small>
+        </p>
+    </div>
 
-    {% for tag in link.tags %}
-    	<a href="{{ path('tag', { 'id': tag.id }) }}" title="Filtrer">
-    		{{ tag.title }}
-    	</a>
-    {% endfor %}
-</p>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Description :</h4>
+                    <p class="card-text">{{ link.desc }}</p>
+
+                    {% if link.tags|length > 0 %}
+                        <div class="link-tags">
+                            <strong>Tags :</strong>
+                            {% for tag in link.tags %}
+                                <a href="{{ path('tag', { 'id': tag.id }) }}" class="label label-info tag-badge">
+                                    <span class="glyphicon glyphicon-tag"></span> {{ tag.title }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="link-actions">
+                        <a href="{{ link.url }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                            <span class="glyphicon glyphicon-new-window"></span> Ouvrir le lien
+                        </a>
+                        <a href="{{ path('home') }}" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-arrow-left"></span> Retour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

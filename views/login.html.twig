@@ -1,31 +1,65 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}User authentication{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
-{% if error %}
-<div class="alert alert-danger">
-    <strong>Login failed!</strong> {{ error }}
-</div>
-{% endif %}
-<div class="well">
-    <form class="form-signin form-horizontal" role="form" action="{{ path('login_check') }}" method="post">
-        <div class="form-group">
-            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-            <input type="text" name="_username" value="{{ last_username }}" class="form-control" placeholder="Enter your username" required autofocus>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                    <h2>Connexion</h2>
+                    <p class="text-muted">Accédez à votre compte Watson</p>
+                </div>
+
+                {% if error %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong><span class="glyphicon glyphicon-exclamation-sign"></span> Erreur de connexion</strong>
+                        <p>{{ 'Bad credentials' in error or 'Invalid credentials' in error ? 'Identifiants incorrects.' : error }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="login-form-wrapper">
+                    <form action="{{ path('login_check') }}" method="post" class="login-form">
+                        <div class="form-group">
+                            <label for="username">
+                                <span class="glyphicon glyphicon-user"></span> Nom d'utilisateur
+                            </label>
+                            <input type="text"
+                                   name="_username"
+                                   id="username"
+                                   value="{{ last_username }}"
+                                   class="form-control input-lg"
+                                   placeholder="Entrez votre nom d'utilisateur"
+                                   required
+                                   autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                <span class="glyphicon glyphicon-lock"></span> Mot de passe
+                            </label>
+                            <input type="password"
+                                   name="_password"
+                                   id="password"
+                                   class="form-control input-lg"
+                                   placeholder="Entrez votre mot de passe"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block btn-login">
+                                Se connecter
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <input type="password" name="_password" class="form-control" placeholder="Enter your password" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button>
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
 {% endblock %}

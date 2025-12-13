@@ -67,6 +67,33 @@ Pour la pagination du back-office, on a choisit une approche côté serveur (PHP
 
 ### Refonte UI
 
+![watson](docs/watson.png) 
+
+Pour la refonte de l'interface de Watson, il a été choisi de conserver Bootstrap dans sa version 3.3 tout en modernisant l'apparence générale de l'application.
+
+**Objectif :** Améliorer l'expérience utilisateur avec une interface plus moderne, épurée et cohérente tout en conservant la structure HTML/CSS existante.
+
+**Modifications apportées :**
+
+- **Palette de couleurs** : Mise en place d'une charte graphique cohérente avec une couleur principale utilisée pour les éléments interactifs (boutons, liens actifs, badges)
+- **Navigation** : Refonte de la barre de navigation avec un fond blanc, des effets de survol subtils et une meilleure hiérarchie visuelle
+- **Cartes de liens** : Transformation des liens en cartes modernes avec ombres portées, coins arrondis (20px) et animations au survol (translation verticale + changement d'ombre)
+- **Formulaires** : Création d'un style unifié pour les pages de connexion et d'éditions
+- **Espace administration** :
+    - Onglets modernisés avec fond blanc, radius cohérent et transition fluide entre les onglets
+    - Tableaux épurés avec lignes au survol et boutons d'action colorés
+    - Modales de confirmation centrées avec icône d'avertissement et design aligné sur les formulaires
+- **Footer** : Simplification avec icône RSS en plus du texte "Flux RSS" et effet au survol
+- **Pagination** : Style moderne avec coins arrondis, couleurs cohérentes et états désactivés visuellement distincts
+
+**Principes de design appliqués :**
+- Utilisation intensive de `border-radius` pour adoucir l'interface
+- Ombres portées (`box-shadow`) pour créer de la profondeur
+- Transitions CSS pour des interactions fluides
+- Espacement généreux pour améliorer la lisibilité
+- Couleurs cohérentes avec la charte graphique
+
+
 ## Phase de développement
 
 Plusieurs issues ont été identifiées en fonction des fonctionnalités à implémenter :
@@ -82,7 +109,7 @@ Plusieurs issues ont été identifiées en fonction des fonctionnalités à impl
 Pour la page de liens, nous avons ajouté un système de pagination dans l’espace d’administration, limitant l’affichage à 15 liens par page. Cela permet de fluidifier la navigation et d’éviter l’affichage d’une liste trop longue.
 
 ![pagination_1](docs/pagination_1.png)
-![pagination_1](docs/pagination_2.png)
+![pagination_2](docs/pagination_2.png)
 
 ### Flux RSS
 

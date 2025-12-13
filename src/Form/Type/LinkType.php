@@ -14,10 +14,10 @@ class LinkType extends AbstractType
         
 
         $builder
-            ->add('title', 'text')
-            ->add('url', 'text')
-            ->add('desc', 'text')
-            ->add('tags', 'text');
+            ->add('title', 'text', array('label' => 'Titre'))
+            ->add('url', 'text', array('label' => 'URL'))
+            ->add('desc', 'text', array('label' => 'Description'))
+            ->add('tags', 'text', array('label' => 'Tags'));
 
     
     }

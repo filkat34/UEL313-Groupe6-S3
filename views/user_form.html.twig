@@ -4,57 +4,80 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
-{% for flashMessage in app.session.flashbag.get('success') %}
-<div class="alert alert-success">
-    {{ flashMessage }}
-</div>
-{% endfor %}
-{% if form_errors(userForm.password.first) %}
-<div class="alert alert-danger">
-    {{ form_errors(userForm.password.first) }}
-</div>
-{% endif %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                    <h2>{{ title }}</h2>
+                    <p class="text-muted">Gestion des comptes utilisateurs</p>
+                </div>
 
-<div class="well">
-{{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
-    <div class="form-group">
-        {{ form_label(userForm.username, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.username) }}
-            {{ form_widget(userForm.username, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span class="glyphicon glyphicon-ok"></span> {{ flashMessage }}
+                    </div>
+                {% endfor %}
+
+                {% if form_errors(userForm.password.first) %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong><span class="glyphicon glyphicon-exclamation-sign"></span> Erreur !</strong>
+                        <p>{{ form_errors(userForm.password.first) }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="login-form-wrapper">
+                    {{ form_start(userForm, { 'attr': {'class': 'login-form'} }) }}
+                    <div class="form-group">
+                        <label for="{{ userForm.username.vars.id }}">
+                            <span class="glyphicon glyphicon-user"></span> Nom d'utilisateur
+                        </label>
+                        {{ form_errors(userForm.username) }}
+                        {{ form_widget(userForm.username, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'placeholder': 'Entrez le nom d\'utilisateur'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ userForm.password.first.vars.id }}">
+                            <span class="glyphicon glyphicon-lock"></span> Mot de passe
+                        </label>
+                        {{ form_widget(userForm.password.first, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'placeholder': 'Entrez le mot de passe'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ userForm.password.second.vars.id }}">
+                            <span class="glyphicon glyphicon-lock"></span> Confirmer le mot de passe
+                        </label>
+                        {{ form_widget(userForm.password.second, { 'attr': {
+                            'class': 'form-control input-lg',
+                            'placeholder': 'Confirmez le mot de passe'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block">
+                            <span class="glyphicon glyphicon-save"></span> Enregistrer
+                        </button>
+                        <a href="{{ path('admin') }}" class="btn btn-default btn-lg btn-block" style="margin-top: 10px;">
+                            <span class="glyphicon glyphicon-remove"></span> Annuler
+                        </a>
+                    </div>
+                    {{ form_end(userForm) }}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        {{ form_label(userForm.password.first, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_widget(userForm.password.first, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(userForm.password.second, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_widget(userForm.password.second, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-   
-    <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-3">
-            <input type="submit" class="btn btn-primary" value="Save" />
-        </div>
-    </div>
-{{ form_end(userForm) }}
-</div>
 {% endblock %}
